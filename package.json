@@ -1,0 +1,31 @@
+{
+  "name": "caso_estudio",
+  "version": "1.0.0",
+  "description": "Caso de estudio 1",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cxldsakeb/Caso_Estudio1.git"
+  },
+  "keywords": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Node",
+    "Express",
+    "BootStrap"
+  ],
+  "author": "Jose Mario Ulloa Vargas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cxldsakeb/Caso_Estudio1/issues"
+  },
+  "homepage": "https://github.com/cxldsakeb/Caso_Estudio1#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

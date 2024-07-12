@@ -1,0 +1,104 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1F1F1F;
+    margin: 0;
+    height: 100vh; /* Asegura que el body ocupe toda la altura de la pantalla */
+}
+
+header {
+    position: absolute;
+    top: 20px;
+    font-size: 50px;
+    color: white;
+}
+
+.container {  
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    margin: 60px auto;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.button {
+    display: inline-flex;
+    overflow: hidden;
+    margin: 10px;
+    padding: 12px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 150ms linear;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none !important;
+    text-transform: capitalize;
+    color: #fff;
+    border: 0;
+    border-radius: var(--borderRadius, 12px);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    appearance: none;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 5px 10px var(--color-smoke);
+}
+
+.button:hover {
+    opacity: 0.85;
+}
+
+.button:active {
+    opacity: 0.75;
+}
+
+.button:focus {
+    outline: 1px dotted #959595;
+    outline-offset: -4px;
+}
+
+.button.-new {
+    color: #202129;
+    background-color: #7F7F7F;
+}
+
+.button.-new:hover {
+    color: #202129;
+    background-color: #e1e2e2;
+    opacity: 1;
+}
+
+.button.-new:active {
+    background-color: #d5d6d6;
+    opacity: 1;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+    margin-top: 30px; /* Ajusta el margen superior según sea necesario */
+}
+
+.grid-item {
+    background-color: #1F1F1F;
+    border-color: #7F7F7F;
+    border-radius: var(--borderRadius, 12px);
+    border: 3px solid #ccc;
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+}
+
+
+  
+  
