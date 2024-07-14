@@ -1,29 +1,53 @@
 const express = require('express');
 const path = require('path');
-//volarme esto sin json
-const fs = require('fs')
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = 3000;
 
-const PUBLIC = path.join(__dirname,'public');
-//esto tambien
-const CONFIG = path.join(__dirname,'config','test.json');
+const PUBLIC = path.join(__dirname, 'public');
 
 app.use(express.static(PUBLIC));
-//esto tambien
 app.use(express.json());
 
-const testConfig = JSON.parse(fs.readFileSync(CONFIG));
-
-app.get('/',(req,res)=>{
-    res.sendFile(path.join(PUBLIC,'home.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(PUBLIC, 'home.html'));
 });
-//esta tambien
-app.get('/config', (req, res) => {
-    res.json(testConfig);
-})
 
-app.listen(PORT, () =>{
-    console.info(`Server running in port ${PORT}`)
+let notes = [];
+
+app.get('/notes', (req, res) => {
+    res.json(notes);
 });
+
+app.post('/notes', (req, res) => {
+    try {
+        const { title, content, tags } = req.body;
+        if (!title || !content) {
+            res.status(400).json({ error: 'Title and content are required' });
+            return;
+        }
+        const newNote = {
+            id: uuidv4(),
+            title,
+            content,
+            tags,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        };
+
+        notes.push(newNote);
+
+        console.log('Note created:', newNote);
+
+        res.json(newNote);
+    } catch (error) {
+        console.error('Error creating note:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.listen(PORT, () => {
+    console.info(`Server running on port ${PORT}`);
+});
+
