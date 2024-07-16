@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="home.css">
-    <script src="client.js"></script>
-
+    <script src="client.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -15,8 +14,6 @@
     <div class="container">
         <div class="button-container">
             <button class="button -new" id="open">New Note</button>
-            <span class="overlay"></span>
-            <button class="button -edit" id="btnedit">Edit Note</button>
         </div>
     </div>
     <div class="container">
@@ -24,7 +21,7 @@
     </div>
     <div class="modal-container" id="modal_container">
         <div class="modal">
-            <h1>Write a new Note!!</h1>
+            <h1 id="modal_title">Write a new Note!!</h1>
             <form id="noteForm">
                 <div>
                     <label for="title">Title:</label>
@@ -38,9 +35,12 @@
                     <label for="tags">Tags:</label>
                     <input type="text" id="tags" name="tags" maxlength="100">
                 </div>
-                <button type="submit" class="button -new">Add Note</button>
+                <div class="button-container">
+                    <button type="submit" class="button -new">Save</button>
+                    <button type="button" id="delete" class="button -edit" style="display: none;">Delete</button>
+                    <button type="button" id="cancel" class="button -new">Cancel</button>
+                </div>
             </form>
-            <button id="close" class="button -new">Close me</button>
         </div>
     </div> 
 </body>

@@ -16,8 +16,14 @@ app.get('/', (req, res) => {
 
 let notes = [];
 
-app.get('/notes', (req, res) => {
-    res.json(notes);
+app.get('/notes/:id', (req, res) => {
+    const { id } = req.params;
+    const note = notes.find(note => note.id === id);
+    if (!note) {
+        res.status(404).json({ error: 'Note not found' });
+        return;
+    }
+    res.json(note);
 });
 
 app.post('/notes', (req, res) => {
@@ -39,10 +45,56 @@ app.post('/notes', (req, res) => {
         notes.push(newNote);
 
         console.log('Note created:', newNote);
-
+        console.log('Current notes:', notes.map(note => note.id));
         res.json(newNote);
     } catch (error) {
         console.error('Error creating note:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.put('/notes/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, content, tags } = req.body;
+        const noteIndex = notes.findIndex(note => note.id === id);
+        if (noteIndex === -1) {
+            res.status(404).json({ error: 'Note not found' });
+            return;
+        }
+        const updatedNote = {
+            ...notes[noteIndex],
+            title,
+            content,
+            tags,
+            updatedAt: new Date().toISOString()
+        };
+        notes[noteIndex] = updatedNote;
+
+        console.log('Note updated:', updatedNote);
+
+        res.json(updatedNote);
+    } catch (error) {
+        console.error('Error updating note:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.delete('/notes/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+        const noteIndex = notes.findIndex(note => note.id === id);
+        if (noteIndex === -1) {
+            res.status(404).json({ error: 'Note not found' });
+            return;
+        }
+        notes.splice(noteIndex, 1);
+
+        console.log('Note deleted:', id);
+
+        res.status(204).end();
+    } catch (error) {
+        console.error('Error deleting note:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
